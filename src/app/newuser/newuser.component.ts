@@ -35,7 +35,10 @@ export class NewuserComponent implements OnInit {
   addChild(): void {
     if (this.children.length < 5) { // Limit to a maximum of 5 children
       this.children.push(this.fb.group({
-        name: ['', Validators.required]
+        mname: ['', Validators.required],
+        dob: ['', Validators.required],
+        age: ['', Validators.required],
+        work: ['', Validators.required]
       }));
     }
   }
@@ -47,11 +50,14 @@ export class NewuserComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
-    if (this.userForm.valid) {
-      console.log(this.userForm.value);
-    } else {
-      console.log('Form is invalid');
+  onSubmit() {
+    console.log("sdfsdfsdf");
+    if  (!this.userForm.valid)
+      {
+      console.log("form is invalid");
+      return
+
     }
+    console.log(this.userForm.getRawValue());
   }
 }

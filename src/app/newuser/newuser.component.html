@@ -3,7 +3,7 @@
     <div class="col-12">
       <form
         [formGroup]="userForm"
-        (ngSubmit)="onSubmit()"
+        
         class="form-container row"
       >
         <h2 class="text-center">User Information</h2>
@@ -151,7 +151,7 @@
                 <label for="childName-{{ i }}">Member Name:</label>
                 <input
                   id="childName-{{ i }}"
-                  formControlName="name"
+                  formControlName="mname"
                   type="text"
                   placeholder= "Enter Member Name"
                   class="form-control"
@@ -170,7 +170,7 @@
                 <label for="childName-{{ i }}">DOB</label>
                 <input
                   id="childName-{{ i }}"
-                  formControlName="name"
+                  formControlName="dob"
                   type="text"
                   placeholder="Enter DOB"
                   class="form-control"
@@ -189,7 +189,7 @@
                 <label for="childName-{{ i }}">Age:</label>
                 <input
                   id="childName-{{ i }}"
-                  formControlName="name"
+                  formControlName="age"
                   type="text"
                   placeholder="Enter Age"
                   class="form-control"
@@ -207,7 +207,7 @@
                 <label for="childName-{{ i }}">Occupation:</label>
                 <input
                   id="childName-{{ i }}"
-                  formControlName="name"
+                  formControlName="work"
                   type="text"
                   placeholder="Enter Occupation"
                   class="form-control"
@@ -242,7 +242,7 @@
           </button>
         </div>
 
-        <button
+        <button (click)="onSubmit()"
           type="submit"
           [disabled]="userForm.invalid"
           class="btn btn-damger btn-block mt-4 col-2"
