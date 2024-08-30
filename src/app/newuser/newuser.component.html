@@ -135,104 +135,102 @@
         </div>
 
         <!-- Children Form Section -->
-        <div class="form-group row">
-          <h3 class="text-center">Member</h3>
-          <div formArrayName="children">
-            <div
-              *ngFor="let child of children.controls; let i = index"
-              [formGroupName]="i"
-              class="child-form row"
-            >
-              <div class="col-3">
-                <label for="childName-{{ i }}">Member Name:</label>
-                <input
-                  id="childName-{{ i }}"
-                  formControlName="mname"
-                  type="text"
-                  placeholder="Enter Member Name"
-                  class="form-control"
-                />
-                <div
-                  class="error"
-                  *ngIf="
-                    child.get('name')?.invalid && child.get('name')?.touched
-                  "
-                >
-                  Child Name is required.
-                </div>
-              </div>
-
-              <div class="col-3">
-                <label for="dob-{{ i }}">DOB</label>
-                <input
-                  id="dob-{{ i }}"
-                  formControlName="dob"
-                  type="date"
-                  placeholder="Enter DOB"
-                  class="form-control"
-                />
-                <div
-                  class="error"
-                  *ngIf="child.get('dob')?.invalid && child.get('dob')?.touched"
-                >
-                  DOB is required.
-                </div>
-              </div>
-
-              <div class="col-3">
-                <label for="childName-{{ i }}">Age:</label>
-                <input
-                  id="childName-{{ i }}"
-                  formControlName="age"
-                  type="text"
-                  placeholder=""
-                  class="form-control"
-                  [disabled]="true"
-                />
-                <div
-                  class="error"
-                  *ngIf="child.get('age')?.invalid && child.get('age')?.touched"
-                ></div>
-              </div>
-
-              <div class="col-3">
-                <label for="childName-{{ i }}">Occupation:</label>
-                <input
-                  id="childName-{{ i }}"
-                  formControlName="work"
-                  type="text"
-                  placeholder="Enter Occupation"
-                  class="form-control"
-                />
-                <div
-                  class="error"
-                  *ngIf="
-                    child.get('name')?.invalid && child.get('name')?.touched
-                  "
-                >
-                  Occupation is required.
-                </div>
-              </div>
-
-              <button
-                type="button"
-                (click)="removeChild(i)"
-                *ngIf="i >= 2"
-                class="btn btn-danger btn-sm mt-2 col-2"
-              >
-                Remove Child
-              </button>
-            </div>
-          </div>
-          <button
-            type="button"
-            (click)="addChild()"
-            class="btn btn-primary mt-3 col-2"
-            [disabled]="children.length >= 5"
-          >
-            Add Child
-          </button>
+       <!-- Children Form Section -->
+<div class="form-group row">
+  <h3 class="text-center">Member</h3>
+  <div formArrayName="children">
+    <div
+      *ngFor="let child of children.controls; let i = index"
+      [formGroupName]="i"
+      class="child-form row"
+    >
+      <div class="col-3">
+        <label for="childName-{{ i }}">Member Name:</label>
+        <input
+          id="childName-{{ i }}"
+          formControlName="mname"
+          type="text"
+          placeholder="Enter Member Name"
+          class="form-control"
+        />
+        <div
+          class="error"
+          *ngIf="
+            child.get('mname')?.invalid && child.get('mname')?.touched
+          "
+        >
+          Member Name is required.
         </div>
+      </div>
+
+      <div class="col-3">
+        <label for="dob-{{ i }}">DOB</label>
+        <input
+          id="dob-{{ i }}"
+          formControlName="dob"
+          type="date"
+          placeholder="Enter DOB"
+          class="form-control"
+        />
+        <div
+          class="error"
+          *ngIf="child.get('dob')?.invalid && child.get('dob')?.touched"
+        >
+          DOB is required.
+        </div>
+      </div>
+
+      <div class="col-3">
+        <label for="childName-{{ i }}">Age:</label>
+        <input
+          id="childName-{{ i }}"
+          formControlName="age"
+          type="text"
+          placeholder="Enter Age"
+          class="form-control"
+          [disabled]="true"
+        />
+      </div>
+
+      <div class="col-3">
+        <label for="childName-{{ i }}">Occupation:</label>
+        <input
+          id="childName-{{ i }}"
+          formControlName="work"
+          type="text"
+          placeholder="Enter Occupation"
+          class="form-control"
+        />
+        <div
+          class="error"
+          *ngIf="child.get('work')?.invalid && child.get('work')?.touched"
+        >
+          Occupation is required.
+        </div>
+      </div>
+
+      <button
+        type="button"
+        (click)="removeChild(i)"
+        *ngIf="i >= 2"
+        class="btn btn-danger btn-sm mt-2 col-2"
+      >
+        Remove Child
+      </button>
+    </div>
+  </div>
+
+  <!-- Display Add Child button only if children.length is less than 5 -->
+  <button
+    type="button"
+    (click)="addChild()"
+    class="btn btn-primary mt-3 col-2"
+    *ngIf="children.length < 5"
+  >
+    Add
+  </button>
+</div>
+
 
         <button
           (click)="onSubmit()"
