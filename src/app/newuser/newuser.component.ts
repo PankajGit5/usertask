@@ -50,6 +50,10 @@ export class NewuserComponent implements OnInit {
     }
   }
 
+
+  
+
+
   onSubmit() {
     console.log("sdfsdfsdf");
     if  (!this.userForm.valid)
@@ -60,4 +64,6 @@ export class NewuserComponent implements OnInit {
     }
     console.log(this.userForm.getRawValue());
   }
+
+
 }

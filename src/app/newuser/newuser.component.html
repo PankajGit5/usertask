@@ -166,24 +166,26 @@
                 </div>
               </div>
 
-              <div class="col-4">
-                <label for="childName-{{ i }}">DOB</label>
+
+               <div class="col-4">
+                <label for="dob-{{ i }}">DOB</label>
                 <input
-                  id="childName-{{ i }}"
+                  id="dob-{{ i }}"
                   formControlName="dob"
-                  type="text"
+                  type="date"
                   placeholder="Enter DOB"
                   class="form-control"
                 />
                 <div
                   class="error"
                   *ngIf="
-                    child.get('name')?.invalid && child.get('name')?.touched
+                    child.get('dob')?.invalid && child.get('dob')?.touched
                   "
                 >
-                DOB is required.
+                  DOB is required.
                 </div>
-              </div>
+              </div> 
+              
 
               <div class="col-4">
                 <label for="childName-{{ i }}">Age:</label>
@@ -201,8 +203,10 @@
                   "
                 >
                 </div>
-              </div>
+              </div> 
 
+
+              
               <div class="col-4">
                 <label for="childName-{{ i }}">Occupation:</label>
                 <input
