@@ -198,29 +198,41 @@
       <div *ngIf="userData.length > 0" class="user-data">
         <h2 class="text-center">User Information</h2>
         <ng-container *ngFor="let userData of userData">
-          <div class="row" >
-            <div class="col-md-4">
-              <strong>First Name:</strong> {{ userData.firstName }}
-            </div>
-            <div class="col-md-4">
-              <strong>Last Name:</strong> {{ userData.lastName }}
-            </div>
-            <div class="col-md-4">
-              <strong>Address 1:</strong> {{ userData.address1 }}
-            </div>
-            <div class="col-md-4">
-              <strong>Address 2:</strong> {{ userData.address2 }}
-            </div>
-            <div class="col-md-4">
-              <strong>City:</strong> {{ userData.city }}
-            </div>
-            <div class="col-md-4">
-              <strong>State:</strong> {{ userData.state }}
-            </div>
-            <div class="col-md-4">
-              <strong>Pincode:</strong> {{ userData.pincode }}
-            </div>
-          </div>
+          <div class="container">
+  <h2 class="text-center mb-4">User Information</h2>
+  <div class="container">
+    <h2 class="text-center mb-4">User Information</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Address 1</th>
+          <th>Address 2</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Pincode</th>
+          <th>Show</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ userData.firstName }}</td>
+          <td>{{ userData.lastName }}</td>
+          <td>{{ userData.address1 }}</td>
+          <td>{{ userData.address2 }}</td>
+          <td>{{ userData.city }}</td>
+          <td>{{ userData.state }}</td>
+          <td>{{ userData.pincode }}</td>
+          <td><button type="button" class="btn btn-info">View</button></td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+</div>
+
           <h3 class="text-center mt-4">Members</h3>
           <div class="row">
             <div *ngFor="let child of userData.children; let i = index" class="col-md-3">
