@@ -1,0 +1,255 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <form
+        [formGroup]="userForm"
+        (ngSubmit)="onSubmit()"
+        class="form-container row"
+      >
+        <h2 class="text-center">User Information</h2>
+
+        <!-- Existing form fields -->
+        <div class="form-group col-4">
+          <label for="firstName">First Name:</label>
+          <input
+            id="firstName"
+            formControlName="firstName"
+            type="text"
+            placeholder="Enter your first name"
+            class="form-control"
+          />
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('firstName')?.invalid &&
+              userForm.get('firstName')?.touched
+            "
+          >
+            First Name is required.
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label for="lastName">Last Name:</label>
+          <input
+            id="lastName"
+            formControlName="lastName"
+            type="text"
+            placeholder="Enter your last name"
+            class="form-control"
+          />
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('lastName')?.invalid &&
+              userForm.get('lastName')?.touched
+            "
+          >
+            Last Name is required.
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label for="address1">Address 1:</label>
+          <input
+            id="address1"
+            formControlName="address1"
+            type="text"
+            placeholder="Enter your address"
+            class="form-control"
+          />
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('address1')?.invalid &&
+              userForm.get('address1')?.touched
+            "
+          >
+            Address 1 is required.
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label for="address2">Address 2:</label>
+          <input
+            id="address2"
+            formControlName="address2"
+            type="text"
+            placeholder="Enter your address"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group col-4">
+          <label for="city">City:</label>
+          <input
+            id="city"
+            formControlName="city"
+            type="text"
+            placeholder="Enter your city"
+            class="form-control"
+          />
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('city')?.invalid && userForm.get('city')?.touched
+            "
+          >
+            City is required.
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label for="state">State:</label>
+          <input
+            id="state"
+            formControlName="state"
+            type="text"
+            placeholder="Enter your state"
+            class="form-control"
+          />
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('state')?.invalid && userForm.get('state')?.touched
+            "
+          >
+            State is required.
+          </div>
+        </div>
+
+        <div class="form-group col-4">
+          <label for="pincode">Pincode:</label>
+          <input
+            id="pincode"
+            formControlName="pincode"
+            type="text"
+            placeholder="Enter your pincode"
+            class="form-control"
+          />
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('pincode')?.invalid &&
+              userForm.get('pincode')?.touched
+            "
+          >
+            Pincode is required and must be a 6-digit number.
+          </div>
+        </div>
+
+        <!-- Children Form Section -->
+        <div class="form-group row">
+          <h3 class="text-center">Member</h3>
+          <div formArrayName="children">
+            <div
+              *ngFor="let child of children.controls; let i = index"
+              [formGroupName]="i"
+              class="child-form row"
+            >
+              <div class="col-4">
+                <label for="childName-{{ i }}">Member Name:</label>
+                <input
+                  id="childName-{{ i }}"
+                  formControlName="name"
+                  type="text"
+                  placeholder= "Enter Member Name"
+                  class="form-control"
+                />
+                <div
+                  class="error"
+                  *ngIf="
+                    child.get('name')?.invalid && child.get('name')?.touched
+                  "
+                >
+                  Child Name is required.
+                </div>
+              </div>
+
+              <div class="col-4">
+                <label for="childName-{{ i }}">DOB</label>
+                <input
+                  id="childName-{{ i }}"
+                  formControlName="name"
+                  type="text"
+                  placeholder="Enter DOB"
+                  class="form-control"
+                />
+                <div
+                  class="error"
+                  *ngIf="
+                    child.get('name')?.invalid && child.get('name')?.touched
+                  "
+                >
+                DOB is required.
+                </div>
+              </div>
+
+              <div class="col-4">
+                <label for="childName-{{ i }}">Age:</label>
+                <input
+                  id="childName-{{ i }}"
+                  formControlName="name"
+                  type="text"
+                  placeholder="Enter Age"
+                  class="form-control"
+                />
+                <div
+                  class="error"
+                  *ngIf="
+                    child.get('name')?.invalid && child.get('name')?.touched
+                  "
+                >
+                </div>
+              </div>
+
+              <div class="col-4">
+                <label for="childName-{{ i }}">Occupation:</label>
+                <input
+                  id="childName-{{ i }}"
+                  formControlName="name"
+                  type="text"
+                  placeholder="Enter Occupation"
+                  class="form-control"
+                />
+                <div
+                  class="error"
+                  *ngIf="
+                    child.get('name')?.invalid && child.get('name')?.touched
+                  "
+                >
+                Occupation is required.
+                </div>
+              </div>
+
+              <button
+                type="button"
+                (click)="removeChild(i)"
+                *ngIf="i >= 2"
+                class="btn btn-danger btn-sm mt-2 col-2"
+              >
+                Remove Child
+              </button>
+            </div>
+          </div>
+          <button
+            type="button"
+            (click)="addChild()"
+            class="btn btn-primary mt-3 col-2"
+            [disabled]="children.length >= 5"
+          >
+            Add Child
+          </button>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="userForm.invalid"
+          class="btn btn-damger btn-block mt-4 col-2"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
