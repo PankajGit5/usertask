@@ -1,11 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <form
-        [formGroup]="userForm"
-        
-        class="form-container row"
-      >
+      <form [formGroup]="userForm" class="form-container row">
         <h2 class="text-center">User Information</h2>
 
         <!-- Existing form fields -->
@@ -147,13 +143,13 @@
               [formGroupName]="i"
               class="child-form row"
             >
-              <div class="col-4">
+              <div class="col-3">
                 <label for="childName-{{ i }}">Member Name:</label>
                 <input
                   id="childName-{{ i }}"
                   formControlName="mname"
                   type="text"
-                  placeholder= "Enter Member Name"
+                  placeholder="Enter Member Name"
                   class="form-control"
                 />
                 <div
@@ -166,8 +162,7 @@
                 </div>
               </div>
 
-
-               <div class="col-4">
+              <div class="col-3">
                 <label for="dob-{{ i }}">DOB</label>
                 <input
                   id="dob-{{ i }}"
@@ -178,36 +173,29 @@
                 />
                 <div
                   class="error"
-                  *ngIf="
-                    child.get('dob')?.invalid && child.get('dob')?.touched
-                  "
+                  *ngIf="child.get('dob')?.invalid && child.get('dob')?.touched"
                 >
                   DOB is required.
                 </div>
-              </div> 
-              
+              </div>
 
-              <div class="col-4">
+              <div class="col-3">
                 <label for="childName-{{ i }}">Age:</label>
                 <input
                   id="childName-{{ i }}"
                   formControlName="age"
                   type="text"
-                  placeholder="Enter Age"
+                  placeholder=""
                   class="form-control"
+                  [disabled]="true"
                 />
                 <div
                   class="error"
-                  *ngIf="
-                    child.get('name')?.invalid && child.get('name')?.touched
-                  "
-                >
-                </div>
-              </div> 
+                  *ngIf="child.get('age')?.invalid && child.get('age')?.touched"
+                ></div>
+              </div>
 
-
-              
-              <div class="col-4">
+              <div class="col-3">
                 <label for="childName-{{ i }}">Occupation:</label>
                 <input
                   id="childName-{{ i }}"
@@ -222,7 +210,7 @@
                     child.get('name')?.invalid && child.get('name')?.touched
                   "
                 >
-                Occupation is required.
+                  Occupation is required.
                 </div>
               </div>
 
@@ -246,7 +234,8 @@
           </button>
         </div>
 
-        <button (click)="onSubmit()"
+        <button
+          (click)="onSubmit()"
           type="submit"
           [disabled]="userForm.invalid"
           class="btn btn-damger btn-block mt-4 col-2"

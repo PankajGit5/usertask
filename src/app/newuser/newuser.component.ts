@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 @Component({
   selector: 'app-newuser',
   templateUrl: './newuser.component.html',
-  styleUrls: ['./newuser.component.css']
+  styleUrls: ['./newuser.component.css'],
 })
 export class NewuserComponent implements OnInit {
   userForm: FormGroup;
@@ -18,7 +18,7 @@ export class NewuserComponent implements OnInit {
       city: ['', Validators.required],
       state: ['', Validators.required],
       pincode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
-      children: this.fb.array([]) // Initialize FormArray for children
+      children: this.fb.array([]), // Initialize FormArray for children
     });
 
     // Add two children by default
@@ -33,13 +33,23 @@ export class NewuserComponent implements OnInit {
   }
 
   addChild(): void {
-    if (this.children.length < 5) { // Limit to a maximum of 5 children
-      this.children.push(this.fb.group({
+    if (this.children.length < 5) {
+      const childForm = this.fb.group({
         mname: ['', Validators.required],
         dob: ['', Validators.required],
-        age: ['', Validators.required],
-        work: ['', Validators.required]
-      }));
+        age: [{ value: '', disabled: true }, Validators.required], // Disable the age input field
+        work: ['', Validators.required],
+      });
+
+      // Update age whenever dob changes
+      childForm.get('dob')?.valueChanges.subscribe((dob) => {
+        if (dob) {
+          const age = this.calculateAge(dob);
+          childForm.get('age')?.setValue(age.toString()); // Convert age to string
+        }
+      });
+
+      this.children.push(childForm);
     }
   }
 
@@ -50,20 +60,29 @@ export class NewuserComponent implements OnInit {
     }
   }
 
+  calculateAge(dob: string): number {
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
 
-  
+    // Adjust age if the birthdate hasn't occurred yet this year
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
 
+    return age;
+  }
 
   onSubmit() {
-    console.log("sdfsdfsdf");
-    if  (!this.userForm.valid)
-      {
-      console.log("form is invalid");
-      return
-
+    console.log('Form submitted');
+    if (!this.userForm.valid) {
+      console.log('form is invalid');
+      return;
     }
     console.log(this.userForm.getRawValue());
   }
-
-
 }
