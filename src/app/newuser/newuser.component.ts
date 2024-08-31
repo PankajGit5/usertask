@@ -8,7 +8,8 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 })
 export class NewuserComponent implements OnInit {
   userForm: FormGroup;
-  userData: any = [ ];
+  userData: any = [];
+  isViewVisible = false;
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
@@ -65,13 +66,18 @@ export class NewuserComponent implements OnInit {
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDiff = today.getMonth() - birthDate.getMonth();
 
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
       age--;
     }
 
     return age;
   }
-
+  toggleView() {
+    this.isViewVisible = !this.isViewVisible;
+  }
   onSubmit() {
     if (!this.userForm.valid) {
       console.log('Form is invalid');

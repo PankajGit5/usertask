@@ -1,14 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <!-- Display User Data Section -->
-      
-
-      <!-- Form Section -->
-      <form [formGroup]="userForm" class="form-container row" >
+      <form [formGroup]="userForm" class="form-container row">
         <h2 class="text-center">User Information</h2>
-
-        <!-- Existing form fields -->
         <div class="form-group col-4">
           <label for="firstName">First Name:</label>
           <input
@@ -18,7 +12,13 @@
             placeholder="Enter your first name"
             class="form-control"
           />
-          <div class="error" *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('firstName')?.invalid &&
+              userForm.get('firstName')?.touched
+            "
+          >
             First Name is required.
           </div>
         </div>
@@ -32,7 +32,13 @@
             placeholder="Enter your last name"
             class="form-control"
           />
-          <div class="error" *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('lastName')?.invalid &&
+              userForm.get('lastName')?.touched
+            "
+          >
             Last Name is required.
           </div>
         </div>
@@ -46,7 +52,13 @@
             placeholder="Enter your address"
             class="form-control"
           />
-          <div class="error" *ngIf="userForm.get('address1')?.invalid && userForm.get('address1')?.touched">
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('address1')?.invalid &&
+              userForm.get('address1')?.touched
+            "
+          >
             Address 1 is required.
           </div>
         </div>
@@ -71,7 +83,12 @@
             placeholder="Enter your city"
             class="form-control"
           />
-          <div class="error" *ngIf="userForm.get('city')?.invalid && userForm.get('city')?.touched">
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('city')?.invalid && userForm.get('city')?.touched
+            "
+          >
             City is required.
           </div>
         </div>
@@ -85,7 +102,12 @@
             placeholder="Enter your state"
             class="form-control"
           />
-          <div class="error" *ngIf="userForm.get('state')?.invalid && userForm.get('state')?.touched">
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('state')?.invalid && userForm.get('state')?.touched
+            "
+          >
             State is required.
           </div>
         </div>
@@ -99,7 +121,13 @@
             placeholder="Enter your pincode"
             class="form-control"
           />
-          <div class="error" *ngIf="userForm.get('pincode')?.invalid && userForm.get('pincode')?.touched">
+          <div
+            class="error"
+            *ngIf="
+              userForm.get('pincode')?.invalid &&
+              userForm.get('pincode')?.touched
+            "
+          >
             Pincode is required and must be a 6-digit number.
           </div>
         </div>
@@ -108,7 +136,11 @@
         <div class="form-group row">
           <h3 class="text-center">Member</h3>
           <div formArrayName="children">
-            <div *ngFor="let child of children.controls; let i = index" [formGroupName]="i" class="child-form row">
+            <div
+              *ngFor="let child of children.controls; let i = index"
+              [formGroupName]="i"
+              class="child-form row"
+            >
               <div class="col-3">
                 <label for="childName-{{ i }}">Member Name:</label>
                 <input
@@ -118,7 +150,12 @@
                   placeholder="Enter Member Name"
                   class="form-control"
                 />
-                <div class="error" *ngIf="child.get('mname')?.invalid && child.get('mname')?.touched">
+                <div
+                  class="error"
+                  *ngIf="
+                    child.get('mname')?.invalid && child.get('mname')?.touched
+                  "
+                >
                   Member Name is required.
                 </div>
               </div>
@@ -132,7 +169,10 @@
                   placeholder="Enter DOB"
                   class="form-control"
                 />
-                <div class="error" *ngIf="child.get('dob')?.invalid && child.get('dob')?.touched">
+                <div
+                  class="error"
+                  *ngIf="child.get('dob')?.invalid && child.get('dob')?.touched"
+                >
                   DOB is required.
                 </div>
               </div>
@@ -158,7 +198,12 @@
                   placeholder="Enter Occupation"
                   class="form-control"
                 />
-                <div class="error" *ngIf="child.get('work')?.invalid && child.get('work')?.touched">
+                <div
+                  class="error"
+                  *ngIf="
+                    child.get('work')?.invalid && child.get('work')?.touched
+                  "
+                >
                   Occupation is required.
                 </div>
               </div>
@@ -174,7 +219,6 @@
             </div>
           </div>
 
-          <!-- Display Add Child button only if children.length is less than 5 -->
           <button
             type="button"
             (click)="addChild()"
@@ -199,57 +243,65 @@
         <h2 class="text-center">User Information</h2>
         <ng-container *ngFor="let userData of userData">
           <div class="container">
+            <div class="container">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address 1</th>
+                    <th>Address 2</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Pincode</th>
+                    <th>Show</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ userData.firstName }}</td>
+                    <td>{{ userData.lastName }}</td>
+                    <td>{{ userData.address1 }}</td>
+                    <td>{{ userData.address2 }}</td>
+                    <td>{{ userData.city }}</td>
+                    <td>{{ userData.state }}</td>
+                    <td>{{ userData.pincode }}</td>
+                    <td>
+                      <button (click)="toggleView()" class="btn btn-primary">
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-  <div class="container">
-  
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Address 1</th>
-          <th>Address 2</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Pincode</th>
-          <th>Show</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ userData.firstName }}</td>
-          <td>{{ userData.lastName }}</td>
-          <td>{{ userData.address1 }}</td>
-          <td>{{ userData.address2 }}</td>
-          <td>{{ userData.city }}</td>
-          <td>{{ userData.state }}</td>
-          <td>{{ userData.pincode }}</td>
-          <td><button type="button" class="btn btn-info">View</button></td>
-
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-</div>
-
-          <h3 class="text-center mt-4">Members</h3>
           <div class="row">
-            <div *ngFor="let child of userData.children; let i = index" class="col-md-3">
-              <div class="child-info">
-                <strong>Member Name:</strong> {{ child.mname }}<br>
-                <strong>DOB:</strong> {{ child.dob }}<br>
-                <strong>Age:</strong> {{ child.age }}<br>
-                <strong>Occupation:</strong> {{ child.work }}
+            <div class="text-center"></div>
+            <div *ngIf="isViewVisible" class="row mt-3 mb-5">
+              <h3>Members</h3>
+              <div *ngFor="let child of userData.children; let i = index">
+                <div class="child-info row mb-3">
+                  <div class="col-3">
+                    <strong>Member Name:</strong> {{ child.mname }}<br />
+                  </div>
+                  <div class="col-3">
+                    <strong>DOB:</strong> {{ child.dob }}<br />
+                  </div>
+
+                  <div class="col-3">
+                    <strong>Age:</strong> {{ child.age }}<br />
+                  </div>
+                  <div class="col-3">
+                    <strong>Occupation:</strong> {{ child.work }}
+                  </div>
+                </div>
               </div>
-              
             </div>
           </div>
         </ng-container>
-        
       </div>
-
-
     </div>
   </div>
 </div>
