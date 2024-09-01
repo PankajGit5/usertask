@@ -13,13 +13,27 @@ export class NewuserComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z ]+$'), // Only letters and spaces
+          Validators.maxLength(45), // 45-character limit
+        ],
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z ]+$'), // Only letters and spaces
+          Validators.maxLength(45), // 45-character limit
+        ],
+      ],
       address1: ['', Validators.required],
       address2: [''],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      pincode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
+      pincode: ['', [Validators.required]],
       children: this.fb.array([]),
     });
 
@@ -60,6 +74,23 @@ export class NewuserComponent implements OnInit {
     }
   }
 
+  preventNumbers(event: KeyboardEvent): void {
+    const charCode = event.key.charCodeAt(0);
+    if (charCode >= 48 && charCode <= 57) {
+      event.preventDefault();
+    }
+  }
+
+
+  preventAlpha(event: KeyboardEvent): void {
+    const charCode = event.key.charCodeAt(0);
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  }
+  
+  
+
   calculateAge(dob: string): number {
     const birthDate = new Date(dob);
     const today = new Date();
@@ -75,9 +106,11 @@ export class NewuserComponent implements OnInit {
 
     return age;
   }
+
   toggleView() {
     this.isViewVisible = !this.isViewVisible;
   }
+
   onSubmit() {
     if (!this.userForm.valid) {
       console.log('Form is invalid');

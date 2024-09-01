@@ -11,6 +11,8 @@
             type="text"
             placeholder="Enter your first name"
             class="form-control"
+            (keypress)="preventNumbers($event)"
+            maxlength="21"
           />
           <div
             class="error"
@@ -31,6 +33,8 @@
             type="text"
             placeholder="Enter your last name"
             class="form-control"
+            (keypress)="preventNumbers($event)"
+            maxlength="21"
           />
           <div
             class="error"
@@ -51,6 +55,7 @@
             type="text"
             placeholder="Enter your address"
             class="form-control"
+            maxlength="45"
           />
           <div
             class="error"
@@ -71,6 +76,8 @@
             type="text"
             placeholder="Enter your address"
             class="form-control"
+            maxlength="45"
+
           />
         </div>
 
@@ -82,6 +89,8 @@
             type="text"
             placeholder="Enter your city"
             class="form-control"
+            maxlength="21"
+            (keypress)="preventNumbers($event)"
           />
           <div
             class="error"
@@ -101,6 +110,8 @@
             type="text"
             placeholder="Enter your state"
             class="form-control"
+            maxlength="17"
+            (keypress)="preventNumbers($event)"
           />
           <div
             class="error"
@@ -120,6 +131,9 @@
             type="text"
             placeholder="Enter your pincode"
             class="form-control"
+            maxlength="9"
+            minlength="3"
+            (keypress)="preventAlpha($event)"
           />
           <div
             class="error"
@@ -128,7 +142,7 @@
               userForm.get('pincode')?.touched
             "
           >
-            Pincode is required and must be a 6-digit number.
+            Pincode is required and must be number.
           </div>
         </div>
 
@@ -149,6 +163,8 @@
                   type="text"
                   placeholder="Enter Member Name"
                   class="form-control"
+                  maxlength="17"
+                  (keypress)="preventNumbers($event)"
                 />
                 <div
                   class="error"
@@ -197,6 +213,8 @@
                   type="text"
                   placeholder="Enter Occupation"
                   class="form-control"
+                  maxlength="19"
+                  (keypress)="preventNumbers($event)"
                 />
                 <div
                   class="error"
