@@ -17,16 +17,16 @@ export class NewuserComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern('^[a-zA-Z ]+$'), // Only letters and spaces
-          Validators.maxLength(45), // 45-character limit
+          Validators.pattern('^[a-zA-Z ]+$'),
+          Validators.maxLength(45),
         ],
       ],
       lastName: [
         '',
         [
           Validators.required,
-          Validators.pattern('^[a-zA-Z ]+$'), // Only letters and spaces
-          Validators.maxLength(45), // 45-character limit
+          Validators.pattern('^[a-zA-Z ]+$'),
+          Validators.maxLength(45),
         ],
       ],
       address1: ['', Validators.required],
@@ -37,7 +37,6 @@ export class NewuserComponent implements OnInit {
       children: this.fb.array([]),
     });
 
-    // Add two children by default
     this.addChild();
     this.addChild();
   }
@@ -81,6 +80,10 @@ export class NewuserComponent implements OnInit {
     }
   }
 
+  preventTyping(event: KeyboardEvent): void {
+    event.preventDefault();
+  }
+  onDateInput(event: Event): void {}
 
   preventAlpha(event: KeyboardEvent): void {
     const charCode = event.key.charCodeAt(0);
@@ -88,8 +91,6 @@ export class NewuserComponent implements OnInit {
       event.preventDefault();
     }
   }
-  
-  
 
   calculateAge(dob: string): number {
     const birthDate = new Date(dob);
@@ -116,8 +117,20 @@ export class NewuserComponent implements OnInit {
       console.log('Form is invalid');
       return;
     }
-    this.userData.push(this.userForm.getRawValue());
+
+    const submittedData = this.userForm.getRawValue();
+
+    this.userData.push(submittedData);
+
+    const childrenArray = this.userForm.get('children') as FormArray;
+    if (childrenArray.length > 2) {
+      const firstTwoChildren = childrenArray.controls.slice(0, 2);
+      childrenArray.clear();
+      firstTwoChildren.forEach((child) => childrenArray.push(child));
+    }
+
     this.userForm.reset();
+
     console.log('Form submitted');
     console.log(this.userData);
   }

@@ -77,7 +77,6 @@
             placeholder="Enter your address"
             class="form-control"
             maxlength="45"
-
           />
         </div>
 
@@ -176,7 +175,7 @@
                 </div>
               </div>
 
-              <div class="col-3">
+              <div class="form-group col-3">
                 <label for="dob-{{ i }}">DOB</label>
                 <input
                   id="dob-{{ i }}"
@@ -184,6 +183,8 @@
                   type="date"
                   placeholder="Enter DOB"
                   class="form-control"
+                  (input)="onDateInput($event)"
+                  (keydown)="preventTyping($event)"
                 />
                 <div
                   class="error"
